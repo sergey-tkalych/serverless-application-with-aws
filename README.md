@@ -1,1 +1,1 @@
-# Geekspace lecture: Serverless application with AWS
+# Geekspace: Serverless application with AWS
