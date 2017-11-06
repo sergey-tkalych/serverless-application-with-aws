@@ -1,4 +1,4 @@
-service: serverless-application-api
+service: messages-api
 
 plugins:
   - serverless-offline

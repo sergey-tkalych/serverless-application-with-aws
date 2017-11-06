@@ -4,7 +4,7 @@ const config = {
     region: 'localhost',
     endpoint: 'http://localhost:8000',
     tables: {
-      MESSAGES_DYNAMODB_TABLE: process.env.MESSAGES_DYNAMODB_TABLE || 'serverless-application-api-dev-MessagesDynamoDbTable',
+      MESSAGES_DYNAMODB_TABLE: process.env.MESSAGES_DYNAMODB_TABLE || 'messages-api-dev-MessagesDynamoDbTable',
     },
   },
 };

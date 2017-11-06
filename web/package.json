@@ -1,7 +1,7 @@
 {
-  "name": "serverless-application-web",
+  "name": "messages-web",
   "version": "1.0.0",
-  "description": "Serverless application Web",
+  "description": "Messages Web",
   "author": "Sergey Tkalych",
   "private": true,
   "scripts": {
@@ -22,6 +22,7 @@
     "material"
   ],
   "dependencies": {
+    "axios": "^0.17.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
