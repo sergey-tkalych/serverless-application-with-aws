@@ -1,6 +1,6 @@
 class LambdaRasponse{
   constructor(data, statusCode, statusMessage){
-    this.data = data;
+    this.data = data || {};
     this.statusCode = statusCode || 200;
     this.statusMessage = statusMessage || 'Success';
   }
