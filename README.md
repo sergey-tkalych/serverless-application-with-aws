@@ -1,1 +1,1 @@
-# Geekspace: Serverless application with AWS
+# Serverless application with AWS

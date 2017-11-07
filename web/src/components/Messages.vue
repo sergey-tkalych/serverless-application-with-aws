@@ -3,10 +3,10 @@
     <h1>Post a message!</h1>
     <div id="messageForm">
       <div>
-        <input id="messageInput" type="text" placeholder="Leave a great idea..." v-model="message" @change="postMessage()"/>
+        <input id="messageInput" type="text" placeholder="Leave a great idea..." v-model="message" @change="postMessage()" autocomplete="off"/>
       </div>
     </div>
-    <div id="messages">
+    <div id="messages" v-infinite-scroll="loadMoreMessages" infinite-scroll-disabled="loadingMessages" infinite-scroll-distance="10">
       <ul>
         <li v-for="item of messages" :key="item.id">
           {{item.message}}
@@ -21,19 +21,15 @@ import HTTP from '../modules/http';
 
 export default {
   name: 'Messages',
+
   data() {
     return {
       messages: [],
       message: '',
+      loadingMessages: false,
+      messagesLoadLimit: 10,
+      messagesLastKey: null,
     };
-  },
-
-  created() {
-    HTTP
-      .get('messages')
-      .then((response) => {
-        this.messages = response.data.data.Items;
-      });
   },
 
   methods: {
@@ -45,6 +41,19 @@ export default {
         .then((response) => {
           this.message = '';
           this.messages.unshift(response.data.data);
+        });
+    },
+
+    loadMoreMessages() {
+      this.loadingMessages = true;
+      HTTP
+        .get(`messages?limit=${this.messagesLoadLimit}&last=${JSON.stringify(this.messagesLastKey)}`)
+        .then((response) => {
+          this.messages = this.messages.concat(response.data.data.Items);
+          this.messagesLastKey = response.data.data.LastEvaluatedKey;
+          if (this.messagesLastKey) {
+            this.loadingMessages = false;
+          }
         });
     },
   },
@@ -62,6 +71,9 @@ export default {
   height: 30px;
   font-size: 20px;
   text-align: center;
+}
+#messageInput:focus{
+  outline-width: 0;
 }
 #messages ul{
   list-style: none;
