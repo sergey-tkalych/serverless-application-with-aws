@@ -82,5 +82,9 @@ export default {
 }
 #messages li{
   padding: 10px 0;
+  transition: color .5s;
+}
+#messages li:hover{
+  color: #7551b7;
 }
 </style>

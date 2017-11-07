@@ -4,7 +4,7 @@ class MessagesModel {
   constructor(message) {
     this.id = uuid();
     this.message = message;
-    this.createdAt = new Date().getTime();
+    this.createdAt = new Date().toISOString();
   }
 
   toObject(){
