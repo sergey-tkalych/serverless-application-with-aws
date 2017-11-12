@@ -21,3 +21,9 @@ exports.create = (event) => {
     .create(bodyParams.params.message)
     .then(LambdaResponse.create);
 }
+
+exports.delete = (event) => {
+  return messages
+    .delete(event.pathParameters.id)
+    .then(LambdaResponse.create);
+}

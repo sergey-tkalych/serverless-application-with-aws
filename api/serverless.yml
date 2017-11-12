@@ -2,16 +2,16 @@ service: messages-api
 
 plugins:
   - serverless-offline
-  - serverless-dynamodb-local
+#  - serverless-dynamodb-local
 
-custom:
-  dynamodb:
-    start:
-      port: 8000
-      inMemory: true
-      migrate: true
-    migration:
-      dir: offline/migrations
+# custom:
+#   dynamodb:
+#     start:
+#       port: 8000
+#       inMemory: true
+#       migrate: true
+#     migration:
+#       dir: offline/migrations
 
 provider:
   name: aws
@@ -47,6 +47,13 @@ functions:
       - http:
           path: messages
           method: post
+          cors: true
+  messagesDelete:
+    handler: src/lambdas/messages/handler.delete
+    events:
+      - http:
+          path: messages/{id}
+          method: delete
           cors: true
 
 resources:

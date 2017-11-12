@@ -28,3 +28,16 @@ exports.create = (message) => {
     .promise()
     .then(() => params.Item);
 }
+
+exports.delete = (id) => {
+  const params = {
+    TableName,
+    Key: {
+      id,
+    },
+  };
+
+  return dynamodb
+    .delete(params)
+    .promise();
+}

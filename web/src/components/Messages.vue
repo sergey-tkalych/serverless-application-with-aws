@@ -9,7 +9,8 @@
     <div id="messages" v-infinite-scroll="loadMoreMessages" infinite-scroll-disabled="loadingMessages" infinite-scroll-distance="10">
       <ul>
         <li v-for="item of messages" :key="item.id">
-          {{item.message}}
+          <span>{{item.message}}</span>
+          <span class="delete" @click="deleteMessage(item)">delete</span>
         </li>
       </ul>
     </div>
@@ -33,7 +34,7 @@ export default {
   },
 
   methods: {
-    postMessage() {
+    postMessage() { // Todo: handle errors
       HTTP
         .post('messages', {
           message: this.message,
@@ -44,7 +45,7 @@ export default {
         });
     },
 
-    loadMoreMessages() {
+    loadMoreMessages() { // Todo: handle errors
       this.loadingMessages = true;
       HTTP
         .get(`messages?limit=${this.messagesLoadLimit}&last=${JSON.stringify(this.messagesLastKey)}`)
@@ -54,6 +55,15 @@ export default {
           if (this.messagesLastKey) {
             this.loadingMessages = false;
           }
+        });
+    },
+
+    deleteMessage(message) { // Todo: handle errors
+      HTTP
+        .delete(`messages/${message.id}`)
+        .then(() => {
+          const messageIndex = this.messages.indexOf(message);
+          this.messages.splice(messageIndex, 1);
         });
     },
   },
@@ -78,13 +88,26 @@ export default {
 #messages ul{
   list-style: none;
   padding: 0;
-  margin: 20px 0;
+  margin: 0;
 }
 #messages li{
-  padding: 10px 0;
+  padding: 20px 0 0;
   transition: color .5s;
+  position: relative;
+}
+#messages li .delete{
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: none;
+  text-align: right;
+  cursor: pointer;
+  color: #848484;
 }
 #messages li:hover{
   color: #7551b7;
+}
+#messages li:hover .delete{
+  display: inline-block;
 }
 </style>
