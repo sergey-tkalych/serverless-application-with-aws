@@ -1,17 +1,19 @@
 service: messages-api
 
 plugins:
+  - serverless-webpack
   - serverless-offline
-#  - serverless-dynamodb-local
+  - serverless-dynamodb-local
 
-# custom:
-#   dynamodb:
-#     start:
-#       port: 8000
-#       inMemory: true
-#       migrate: true
-#     migration:
-#       dir: offline/migrations
+custom:
+  webpackIncludeModules: true
+  dynamodb:
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+    migration:
+      dir: offline/migrations
 
 provider:
   name: aws
@@ -58,7 +60,7 @@ functions:
 
 resources:
   Resources:
-    UrlsDynamoDbTable:
+    MessagesDynamoDbTable:
       Type: 'AWS::DynamoDB::Table'
       DeletionPolicy: Retain
       Properties:
