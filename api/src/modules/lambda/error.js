@@ -16,6 +16,7 @@ class LambdaError extends LambdaResponse {
   toObject(){
     return {
       statusCode: this.statusCode,
+      headers: this.headers,
       body: JSON.stringify({
         error: true,
         statusMessage: this.statusMessage,
