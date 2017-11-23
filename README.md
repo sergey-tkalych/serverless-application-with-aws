@@ -27,3 +27,7 @@ Second Tab:
 $ cd web
 $ npm run dev
 ```
+
+### Presentation about serverless
+
+http://slides.com/sergeytkalych/deck-7/fullscreen
