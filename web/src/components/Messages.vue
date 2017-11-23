@@ -72,7 +72,7 @@ export default {
 
 <style scoped>
 #messageForm {
-  padding: 0 100px;
+  padding: 0 20px;
 }
 #messageInput {
   border: none;
